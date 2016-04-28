@@ -10,14 +10,14 @@ $ python -V
 -  객체에다 클래스를 부르면 그것이 인스턴트가 된다.  
 > 예.  
 
-'''
-  {python}  class Calculator:
+```python
+  class Calculator:
 	  		def __init__(self):
 				self.result = 0
 			def adder(self, num):
 				self.result += num
 				return self.result
-'''
+
     cal1 = Calculator()
     cal2 = Calculator()
     print(cal1.adder(3))
