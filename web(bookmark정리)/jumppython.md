@@ -8,10 +8,10 @@ $ python -V
 >예
 
 ```python
-class Calculator:
-  def __init__(self):
-    self.result = 0
-  def adder(self, num):
+class Calculator: #Calculator라는 class생성
+  def __init__(self): #__init__는 인스턴트를 생성할때 마다 무조건 호출됨.
+    self.result = 0 # self는 객체 id를 부르는 개념. 아래에서는 cal1, cal2에 해당됨
+  def adder(self, num): #__init__에서 확인한 self id 랑 같은 인스턴트에 adder해준다.
 	  self.result += num
 		return self.result
 
@@ -25,3 +25,13 @@ print(cal2.adder(7))
 
 
 Caculator라는 클래스 안에 adder라는 함수가 있고, 이것을 cal1, cal2라는 객체에 인스턴트로 부르다. 그리고 cal1, cal2 인스턴트에 adder 함수를 호출하는 방식. 결국 함수를 정의 하고 사용하면 한번에 한 memory를 사용해야하지만, 인스턴스 방식은 호출, 사용이 자유로움.
+
+```python
+class Service:
+  def __init__(self, name):
+    self.name = name
+  def sum(self, a, b):
+    result = a + b
+    print("%s님 %s + %s = %s입니다." % (self.name, a, b, result))
+```  
+위 코드에서는 pey = Service("이현수") 처럼 객체에 인스턴트를 부를때 name을 넣어줘야한다.
