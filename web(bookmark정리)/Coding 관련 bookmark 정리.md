@@ -8,7 +8,8 @@ $ python -V
 클래스 개념.
 -  함수 이긴 한데, 인스턴트를 쓸수 있는것.
 -  객체에다 클래스를 부르면 그것이 인스턴트가 된다.  
-> 예.
+> 예.  
+
 '''
   {python}  class Calculator:
 	  		def __init__(self):
