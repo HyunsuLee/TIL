@@ -35,3 +35,17 @@ class Service:
     print("%s님 %s + %s = %s입니다." % (self.name, a, b, result))
 ```  
 위 코드에서는 pey = Service("이현수") 처럼 객체에 인스턴트를 부를때 name을 넣어줘야한다.
+
+###클래스 상속
+```python
+class HousePark():
+  lastname = "박"
+  def __init__(self, name):
+    fullname = lastname + self.name
+
+class HouseKim(HousePark): #이게 상속. housepakr과 같은 함수기능을 형성함.
+    lastname = "김" #대신 lastname만 김으로 바꿈.
+```
+
+###클래스 오버라이딩
+클래스를 상속할때, 다른 함수를 추가하면 오버라이딩.
