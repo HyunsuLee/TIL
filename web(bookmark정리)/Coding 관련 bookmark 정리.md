@@ -31,6 +31,7 @@ conda package tensorflow를 설치하는것은 아예 다른 버젼을 설치하
 
 pycharm 실행을 terminal 에서 해주면 됨
 
+
 현재 내 컴 환경은
 
 cd pycharm/bin
@@ -39,5 +40,11 @@ bash pycharm.sh
 참고한 [블로그](http://yeramee.tistory.com/m/post/1)
 
 Pycharm 을 사용하는 동안 terminal을 닫으면 안됨.
+
+
+## Rstudio로 Git version 관리
+github에 내 SSH키를 등록 시켜야함.
+
+https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/
 
 
