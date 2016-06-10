@@ -15,12 +15,29 @@
 [terryum 블로그](http://terryum.io/ml_practice/2016/05/15/UbuntuSetup/)
 에서 anaconda를 sudo 안쓰고 설치하는 부분을 따라한다
 
-이렇게만 하면 terminal에서는 tensorflow가 구동되지만, pycharm안에서는 안된다. 
+--이렇게만 하면 terminal에서는 tensorflow가 구동되지만, pycharm안에서는 안된다. 
 
-그래서 conda package형태의 tensorflow를 추가함.
-
-
-conda install -c https://conda.anaconda.org/jjhelmus tensorflow
+--그래서 conda package형태의 tensorflow를 추가함.
 
 
-참고한 [stackoverflow](http://stackoverflow.com/questions/33646541/tensorflow-and-anaconda-on-ubuntu)
+--conda install -c https://conda.anaconda.org/jjhelmus tensorflow
+
+
+--참고한 [stackoverflow](http://stackoverflow.com/questions/33646541/tensorflow-and-anaconda-on-ubuntu)
+
+conda package tensorflow를 설치하는것은 아예 다른 버젼을 설치하는것. 
+
+위에 terryum&경제학 blog를 충실히 따라 가되
+
+pycharm 실행을 terminal 에서 해주면 됨
+
+현재 내 컴 환경은
+
+cd pycharm/bin
+bash pycharm.sh
+
+참고한 [블로그](http://yeramee.tistory.com/m/post/1)
+
+Pycharm 을 사용하는 동안 terminal을 닫으면 안됨.
+
+
