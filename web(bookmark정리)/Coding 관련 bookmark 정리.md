@@ -41,6 +41,14 @@ bash pycharm.sh
 
 Pycharm 을 사용하는 동안 terminal을 닫으면 안됨.
 
+## R설치
+terminal 에서  update용 sourcelist에 CRAN mirror를 등록하기
+
+deb http://cran.biodisk.org/bin/linux/ubuntu trusty/
+
+로 하는게 젤 빠름.(대구-울산)
+
+참고한 [블로그](http://r.fossa.kr/?p=58), [CRAN 공식문서](https://cran.r-project.org/bin/linux/ubuntu/README)
 
 ## Rstudio로 Git version 관리
 github에 내 SSH키를 등록 시켜야함.
