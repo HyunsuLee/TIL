@@ -33,6 +33,21 @@ bash pycharm.sh
 
 Pycharm 을 사용하는 동안 terminal을 닫으면 안됨.
 
+## GPU driver가 사라졌을때
+
+일단 피씨 본체의 reset 버튼으로 강제 리부팅을 하면 날아 가는듯하다
+
+(모니터 Input source 때문에 몇번 리부팅했을때 괜찮은 걸보면 GPU 컴퓨팅 중에 하면 날아가는듯)
+
+그러면 CUDA만 다시 설치하면됨 
+
+1. 재부팅후 ctrl+alt+F1으로 가상터미널 접속
+2. sudo stop lightdm, sudo service lightdm stop
+3. su sh cuda_7.5.18_linux.run(nvidia driver yes, openGL no)
+4. sudo reboot 하면 드라이버는 가동
+5. CUDNN다시 카피(sudo nautilus로 관리자 탐색기 띄우고 Home/cuda에 있는 파일들을 usr/local/cuda로 각각 옮긴다.)
+
+
 ## R설치
 terminal 에서  update용 sourcelist에 CRAN mirror를 등록하기
 
