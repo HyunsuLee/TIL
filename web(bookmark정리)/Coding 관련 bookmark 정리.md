@@ -46,6 +46,15 @@ Pycharm 을 사용하는 동안 terminal을 닫으면 안됨.
 3. su sh cuda_7.5.18_linux.run(nvidia driver yes, openGL no)
 4. sudo reboot 하면 드라이버는 가동
 5. CUDNN다시 카피(sudo nautilus로 관리자 탐색기 띄우고 Home/cuda에 있는 파일들을 usr/local/cuda로 각각 옮긴다.)
+ 
+## 모니터 먹통 현상 해결
+### input source 바꾸기 등으로 우분투로 부터의 display가 안뜰때
+ctrl + alt + F1 으로 가상터미널로 들어가 display가 뜨는걸 확인하고(optional)
+
+ctrl + alt + F7 으로 GUI환경으로 다시 돌아 온다.
+
+
+
 
 
 ## R설치
