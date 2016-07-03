@@ -33,3 +33,6 @@ https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/
 git config remote.origin.url git@github.com:HyunsuLee/???.git  
 git pull origin master  
 git push origin master  
+
+모든 git repository에 대해 작업 해줘야하는 듯.  
+repository를 clone할때부터 SSH방식을 쓰면 될듯.  
