@@ -1,3 +1,11 @@
+# Ubuntu 16.04 설치
+
+우분투 배포판 다운로드, USB부팅 디스크 제작   
+윈도우에서 해야함.  
+/는 OS booting 전용 영역 package들을 깔걸 생각해서 64G정도 잡음  
+swap 영역은 윈도우의 cache에 해당 32G  
+나머지 partition은 /home으로 몰아줌(이럼 사용자ᅟdata는 따로 백업가능)
+
 
 ## Ubuntu에 tensorflow(GPU) 돌리기
 
@@ -7,15 +15,18 @@
 이걸따라가고,
 
 [terryum 블로그](http://terryum.io/ml_practice/2016/05/15/UbuntuSetup/)
-에서 anaconda를 sudo 안쓰고 설치하는 부분을 따라한다
+도 참고 할것.
 
-~~이렇게만 하면 terminal에서는 tensorflow가 구동되지만, pycharm안에서는 안된다. 그래서 conda package형태의 tensorflow를 추가함. conda install -c https://conda.anaconda.org/jjhelmus tensorflow 참고한 [stackoverflow](http://stackoverflow.com/questions/33646541/tensorflow-and-anaconda-on-ubuntu)~~
+[nvidia 공식 홈피](http://www.nvidia.com/download/driverResults.aspx/104284/en-us)에서 정식 그래픽 드라이버를 깔고,  
+CUDA를 깔땐 driver, openGL전부 안깐다. cuda랑 샘플만 깔아줌.  
 
-conda package tensorflow를 설치하는것은 아예 다른 버젼을 설치하는것.
+[텐서플로우 공식페이지](https://www.tensorflow.org/versions/r0.9/get_started/os_setup.html#anaconda-installation) 를 참고하여  
+anaconda를 python 2.7버젼과 python 3.5버젼 용으로 따로 깔고,  
+conda 가상 환경을 각각 만들어줌.  
+마찬가지로 conda 가상 환경 안에서 알맞는 tensorflow version을 각각 Install.  
+(pip version이 안맞는다는 error도 conda깔고 그안에서 이것저것 깔면 해결)   
 
-위에 terryum&경제학 blog를 충실히 따라 가되
-
-pycharm 실행을 terminal 에서 해주면 됨
+pycharm 실행을 conda 가상 환경 terminal 에서 해주면 됨
 
 
 현재 내 컴 환경은
@@ -27,11 +38,15 @@ bash pycharm.sh
 
 Pycharm 을 사용하는 동안 terminal을 닫으면 안됨.
 
+
+
 ## GPU driver가 사라졌을때
+!!!요부분은 아직 경험하지 못한 부분 우분투 14.04를 쓸 땐 CUDA driver를 썼지만,  
+16에서는 따로 드라이버를 잡았으로, 그 드라이버를 새로 깔아서 해결해보자.  
+그전에 이 현상이 안 일어나야겠지.... 자동 업데하다 nvidia랑 충돌나서 생기는 문제인 거 같은데.  
 
-일단 피씨 본체의 reset 버튼으로 강제 리부팅을 하면 날아 가는듯하다
-
-(모니터 Input source 때문에 몇번 리부팅했을때 괜찮은 걸보면 GPU 컴퓨팅 중에 하면 날아가는듯)
+~~일단 피씨 본체의 reset 버튼으로 강제 리부팅을 하면 날아 가는듯하다~~  
+~~(모니터 Input source 때문에 몇번 리부팅했을때 괜찮은 걸보면 GPU 컴퓨팅 중에 하면 날아가는듯)~~
 
 그러면 CUDA만 다시 설치하면됨
 
