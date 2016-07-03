@@ -27,4 +27,9 @@ deb http://cran.biodisk.org/bin/linux/ubuntu trusty/
 ## Rstudio로 Git version 관리
 github에 내 SSH키를 등록 시켜야함.
 
-https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/
+https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/  
+
+터미널에서 한번 작업을 해줘야함. HTTP가 아닌 SSH방식으로  
+git config remote.origin.url git@github.com:HyunsuLee/???.git  
+git pull origin master  
+git push origin master  
