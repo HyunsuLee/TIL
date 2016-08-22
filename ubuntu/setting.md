@@ -59,11 +59,13 @@ Pycharm 을 사용하는 동안 terminal을 닫으면 안됨.
 
 ## allensdk
 현재 document에 python notebook file들을 받아 test중.
-그중 biophysical model은 [NEURON](http://www.neuron.yale.edu./neuron/download/compile_linux#step2)이 있어야 기능함.
+그중 biophysical model은 [NEURON](http://www.neuron.yale.edu./neuron/download/compile_linux#step2)이 있어야 기능함.  
 iv(interview)라는 것은 먼저 설치해야하며  
-$HOME에 neuron/iv, neuron 디렉토리에 파일을 두개 풀고 설치함.
+$HOME에 neuron/iv, neuron 디렉토리에 파일을 두개 풀고 설치함.  
 ./configure 하면 X11이 없다고 오류가 나는데, 
-```shell bash
+
+
+```bash 
 sudo apt-get install libxext-dev
 sudo apt-get install mercurial bison flex automake libtool g++ rpm
 sudo apt-get install libxext-dev libncurses-dev python-dev
@@ -71,6 +73,8 @@ sudo apt-get install cython alien
 sudo apt-get install xfonts-100dpi #helvetica
 sudo apt-get install xfonts-75dpi #for some special idraw I like
 ```
-들을 깔아주면 해결.
-다 깔고 나서 nrniv나 nrngui는 안먹지만(명령어가 없다고 나옴)
+
+
+들을 깔아주면 해결.  
+다 깔고 나서 nrniv나 nrngui는 안먹지만(명령어가 없다고 나옴)  
 Python에 neuron package은 불러와짐. allen conda env에 설치함.
