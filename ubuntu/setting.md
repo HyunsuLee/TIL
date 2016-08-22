@@ -76,5 +76,9 @@ sudo apt-get install xfonts-75dpi #for some special idraw I like
 
 
 들을 깔아주면 해결.  
-다 깔고 나서 nrniv나 nrngui는 안먹지만(명령어가 없다고 나옴)  
-Python에 neuron package은 불러와짐. allen conda env에 설치함.
+~~다 깔고 나서 nrniv나 nrngui는 안먹지만(명령어가 없다고 나옴)~~
+
+Python에 neuron package은 불러와짐. allen conda env에 설치함.  
+```shell
+~/neuron/nrn/bin$ bash nrngui -python
+```
