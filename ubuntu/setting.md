@@ -82,3 +82,30 @@ Python에 neuron package은 불러와짐. allen conda env에 설치함.
 ```shell
 ~/neuron/nrn/bin$ bash nrngui -python
 ```
+
+
+## unbuntu file sharing with OSX
+root 계정으로 들어가서 samba를 깔아준다.
+```bash
+sudo su
+apt-get install gksu
+apt-get install libcups2 samba samba-common
+```
+samba setting file을 열어서 user 계정을 팔수있게 한다.
+```bash
+gedit /etc/samba/smb.conf
+# editor에서
+  security = user
+  username map = /etc/samba/smbusers
+# 적당히 추가
+service smbd restart #cmd line에서 samba restart
+```
+그런 다음 samba user를 추가해준다
+```bash
+smbpasswd -a <username>
+service smbd restart
+```
+이제 OSX에서 smb 주소 접근가능. sharing folder를 탐색기해서 정해줘도됨
+
+
+
