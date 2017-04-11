@@ -84,7 +84,7 @@ Python에 neuron package은 불러와짐. allen conda env에 설치함.
 ```
 
 
-## unbuntu file sharing with OSX
+## ubuntu file sharing with OSX
 root 계정으로 들어가서 samba를 깔아준다.
 ```bash
 sudo su
@@ -107,5 +107,13 @@ service smbd restart
 ```
 이제 OSX에서 smb 주소 접근가능. sharing folder를 탐색기해서 정해줘도됨
 
+## ubuntu mouse point speed control
+
+```bash
+xset q | grep -A 1 Pointer
+# 현재 mouse pointer 가속도 값과 역치값이 나옴.
+xset m 8 8
+# 가속값을 8, 역치는 8픽셀로 설정
+```
 
 
