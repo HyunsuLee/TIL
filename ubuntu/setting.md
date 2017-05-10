@@ -115,5 +115,16 @@ xset q | grep -A 1 Pointer
 xset m 8 8
 # 가속값을 8, 역치는 8픽셀로 설정
 ```
+이것을 우분투 시작할 때 실행하기 위해서는  
+rc.local에 명령을 해줘야함  
+```bash
+sudo vim /etc/rc.local
+```
+다음과 같이 추가함  
+```bash
+xset m 8 2
+```
+가속값을 8, 역치는 2픽셀로.
+
 
 
