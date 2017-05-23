@@ -136,4 +136,36 @@ sudo apt update
 sudo apt install pycharm
 ```
 
+## ubuntu control alt key 바꾸기
+맥과 우분투를 번갈아 쓰다보면, control key 위치가 자주 헷갈린다. 맥의 command가 더 안쪽에 있기 때문  
+이를 해결하기 위해 control, alt key mapping
+
+```bash
+~$ code ~/.Xmodmap
+```
+.Xmodmap파일를 home에 만들어준다.
+```bash
+clear control
+clear mod1
+keycode 37 = Alt_L Meta_L
+keycode 64 = Control_L
+add control = Control_L Control_R
+add mod1 = Alt_L Meta_L
+```
+가끔 keycode가 다를수 있다. 이를 위해서 
+```bash
+~$ xev
+```
+를 실행하면 작은 하얀창이 뜨고 이 창에서 control key를 누르면 터미널에서 
+```bash
+KeyPress event, serial 37, synthetic NO, window 0x4c00001,
+    root 0x1f7, subw 0x0, time 953652796, (120,149), root:(1945,253),
+    state 0x0, keycode 37 (keysym 0xffe3, Control_L), same_screen YES,
+    XLookupString gives 0 bytes: 
+    XmbLookupString gives 0 bytes: 
+    XFilterEvent returns: False
+```
+라고 뜸. 여기서 keycode확인하고 바꿔준다. 
+
+
 
