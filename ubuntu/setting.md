@@ -166,7 +166,17 @@ KeyPress event, serial 37, synthetic NO, window 0x4c00001,
     XFilterEvent returns: False
 ```
 라고 뜸. 여기서 keycode확인하고 바꿔준다. 
-자꾸 원래대로 바뀌어서 rc.local 에 추가해둠.
+자꾸 원래대로 바뀌는데, 그 이유는 .bashrc가 터미널 열때마다 실행되면서 keymap을 초기화하기 때문인듯.
+하여 .bashrc에 추가해줌
+```bash
+code ~/.bashrc
+```
+로 열고
+```
+xmodmap ~/.Xmodmap
+```
+을 추가함.
+
 
 
 
