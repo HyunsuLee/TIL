@@ -166,6 +166,7 @@ KeyPress event, serial 37, synthetic NO, window 0x4c00001,
     XFilterEvent returns: False
 ```
 라고 뜸. 여기서 keycode확인하고 바꿔준다. 
+자꾸 원래대로 바뀌어서 rc.local 에 추가해둠.
 
 
 
