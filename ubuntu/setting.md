@@ -176,7 +176,27 @@ code ~/.bashrc
 xmodmap ~/.Xmodmap
 ```
 을 추가함.
+이래도 자꾸 원상복구됨...keymap를 리셋하는 프로그램이 있나봄.
 
+## ubuntu 16.04 matlab issue
+우분투 업글 이후 matlab이 crush 남.
 
-
+```bash
+locate libstdc++.so.6
+```
+를 쳐서, matlab 위치를 찾는다. 나같은 경우
+```bash
+/usr/local/MATLAB/R2016a/sys/os/glnxa64/libstdc++.so.6
+/usr/local/MATLAB/R2016a/sys/os/glnxa64/libstdc++.so.6.0.17
+```
+이었음.
+```bash
+/usr/local/MATLAB/R2016a/sys/os/glnxa64
+```
+로 가서 파일이름을 바꿔줌.
+```bash
+sudo mv libstdc++.so.6 libstdc++.so.6.old
+sudo mv libstdc++.so.6.0.17 libstdc++.so.6.0.17.old 
+```
+이렇게 하면 matlab의 rendering이 제대로 잡힘.
 
