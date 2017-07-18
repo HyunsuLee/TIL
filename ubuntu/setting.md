@@ -178,5 +178,42 @@ xmodmap ~/.Xmodmap
 을 추가함.
 
 
+## Ubuntu ssh server setting
+
+맥과 우분투 모두 ssh는 기본으로 인스톨 되어있다.  
+가장 간단하게 서버에 접속하는 방법은 클라이언트에서 다음과 같이 입력하는 거다.
+```bash
+ssh username@hostip
+```
+나는 서버의 내 계정과 서버 ip를 바로 사용했지만 서버에서 사용자 list를 관리할 수 있다.  
+
+spyder나 pycharm같은 GUI를 실행시킬려면 맥에서 XQuartz안에서 스크린 공유하는 것처럼 실행시킬 수 있다.  
+이걸 위해서는 다음과 같이 입력한다.
+```bash
+ssh -v -Y username@hostip
+```
+
+X11 server를 띄우는 방법인데, 이렇게 하려면 다음과 같은 선행조건을 만족시켜야한다.  
+
+
+__ᅟServer side__
+* xauth가 있어야함(xauth info로 확인)
+* /etc/ssh/sshd_config 파일에서
+```bash
+X11Forwarding yes
+X11DisplayOffset 10
+X11UseLocalhost no
+```
+가 되어있어야한다.  
+
+
+__Client side__
+* /etc/ssh/ssh_config file에서
+```bash
+Host *
+  ForwardAgent yes
+  ForwardX11 yes
+```
+라고 되어있어야한다.
 
 
