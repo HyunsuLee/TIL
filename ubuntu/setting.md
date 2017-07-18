@@ -214,6 +214,27 @@ Host *
   ForwardAgent yes
   ForwardX11 yes
 ```
-라고 되어있어야한다.
+라고 되어있어야한다.  
+하지만 XQuartz가 구리므로 그냥 terminal로만 돌리자.  클라이언트 config에서 위 사항을 주석 처리 하면 -v -Y를 붙이지 않고 접속할 수 있다.
 
+## Using tmux
+우분투서버에 터미널로 접속한다음. 한 터미널 윈도우에서 멀티 세션을 돌리고 싶을때 쓴다.  
+참고 [블로그](http://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/)  
+tmux를 실행시키고 명령어를 입력하는 것을 ctrl+b를 먼저 살짝 눌렀다 떼면 된다.  
+? : help 화면  
+% : 좌우로 pane나누기  
+" : 아래위로 pane나누기  
+화살표 : pane 사이를 이동하기  
+z : 현재 pane을 full size로 키우기. 한번더 누르면 원래 사이즈로  
+ctrl+d : pane 닫기  
+c : 윈도우 하나 더 띄우기  
+p, n : 전, 후 윈도우로 이동  
+숫자 : 숫자에 해당하는 윈도우로 이동 
+, : 현재 윈도우 이름 바꾸기  
+d : tmux를 끄지 않고 나가기(detach)  
+```bash
+tmux ls
+tmux attach -t 0
+```
+명령어로 tmux 화면으로 다시 돌아갈 수 있음.
 
