@@ -217,6 +217,27 @@ Host *
 라고 되어있어야한다.  
 하지만 XQuartz가 구리므로 그냥 terminal로만 돌리자.  클라이언트 config에서 위 사항을 주석 처리 하면 -v -Y를 붙이지 않고 접속할 수 있다.
 
+### ssh server remote setting  
+외부에서도 서버에 접속하기 위해서는 공유기 port forwarding을 쓰면 된다.  
+공유기 setting에서 서버 ip를 잡고, port를 외부, 내부 모두 22(ssh)로 잡아줌.  
+이러면 공유기 ip로 접속된 ssh가 공유기 하의 서버 ip로 넘어감.  
+```bash
+ssh your_id@server_ip
+```
+로 간단하게 외부망에서도 접근할 수 있음.(집에서 테스트해볼것)  
+
+__jupyter notebook__  
+참고 [블로그](http://www.justinkiggins.com/blog/zero-configuration-remote-jupyter-server/)  
+서버에서 주피터를 브라우저 없이 띄운다
+```bash
+server $ jupyter notebook --no-browser --port=8888
+```
+port 8888로 띄운걸, client에서 ssh로 접속해서 땡겨옴.  
+```bash
+client $ ssh -NL 8888:localhost:8888 your_id@server_ip
+```
+다음 내 브라우저에서 localhost:8888을 띄우면 server의 주피터가 뜸.
+
 ## Using tmux
 우분투서버에 터미널로 접속한다음. 한 터미널 윈도우에서 멀티 세션을 돌리고 싶을때 쓴다.  
 참고 [블로그](http://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/)  
