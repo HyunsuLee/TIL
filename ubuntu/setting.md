@@ -56,6 +56,34 @@ Pycharm 을 사용하는 동안 terminal을 닫으면 안됨.
 4. sudo reboot 하면 드라이버는 가동
 5. CUDNN다시 카피(sudo nautilus로 관리자 탐색기 띄우고 Home/cuda에 있는 파일들을 usr/local/cuda로 각각 옮긴다.)
 
+2단계에서 lightdm을 stop하면 가상타미널도 stop되면서 black screen이 되는 경우가 있다.  
+그럴땐 일단
+```bash
+sudo service lightdm start
+```
+를 깜깜이 상태에서 쳐서 화면을 살리고, 다음 단계를 진행한다.  
+이 현상의 원인은 가상터미널에서도 graphic mode가 작동되어서 그런듯 하다.  
+그걸 끄기 위해서 grub을 재설정 해줘야함. 
+```bash
+sudo nautilus
+```
+관리자 탐색기에서  
+/etc/default/grub  을 backup한다.
+```bash
+# GRUB_TERMINAL=console
+# GRUB_GFXMODE=640x480
+```
+으로 터미널 그래픽 모드를 비활성화시킨다. 
+```bash
+sudo update-grub
+```
+그럽을 업데해주고 sudo vim grub에서 다음과 같은 라인을 추가한다.  
+```bash
+gfxpayload=nomodeset
+$~sudo reboot
+```
+그럼 이제 가상터미널에서 lightdm을 stop해도 화면이 보인다.
+
 
 ## allensdk
 현재 document에 python notebook file들을 받아 test중.
@@ -176,8 +204,13 @@ code ~/.bashrc
 xmodmap ~/.Xmodmap
 ```
 을 추가함.
+이래도 자꾸 원상복구됨...keymap를 리셋하는 프로그램이 있나봄.  
+이건 그냥 포기함..
 
+## ubuntu 16.04 matlab issue
+우분투 업글 이후 matlab이 crush 남.
 
+<<<<<<< HEAD
 ## Ubuntu ssh server setting
 
 맥과 우분투 모두 ssh는 기본으로 인스톨 되어있다.  
@@ -258,4 +291,24 @@ tmux ls
 tmux attach -t 0
 ```
 명령어로 tmux 화면으로 다시 돌아갈 수 있음.
+=======
+```bash
+locate libstdc++.so.6
+```
+를 쳐서, matlab 위치를 찾는다. 나같은 경우
+```bash
+/usr/local/MATLAB/R2016a/sys/os/glnxa64/libstdc++.so.6
+/usr/local/MATLAB/R2016a/sys/os/glnxa64/libstdc++.so.6.0.17
+```
+이었음.
+```bash
+/usr/local/MATLAB/R2016a/sys/os/glnxa64
+```
+로 가서 파일이름을 바꿔줌.
+```bash
+sudo mv libstdc++.so.6 libstdc++.so.6.old
+sudo mv libstdc++.so.6.0.17 libstdc++.so.6.0.17.old 
+```
+이렇게 하면 matlab의 rendering이 제대로 잡힘.
+>>>>>>> 3f7e127a803e19659ca1b7227ce74affe5dc0f48
 
