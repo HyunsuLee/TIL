@@ -209,8 +209,26 @@ xmodmap ~/.Xmodmap
 
 ## ubuntu 16.04 matlab issue
 우분투 업글 이후 matlab이 crush 남.
+```bash
+locate libstdc++.so.6
+```
+를 쳐서, matlab 위치를 찾는다. 나같은 경우
+```bash
+/usr/local/MATLAB/R2016a/sys/os/glnxa64/libstdc++.so.6
+/usr/local/MATLAB/R2016a/sys/os/glnxa64/libstdc++.so.6.0.17
+```
+이었음.
+```bash
+/usr/local/MATLAB/R2016a/sys/os/glnxa64
+```
+로 가서 파일이름을 바꿔줌.
+```bash
+sudo mv libstdc++.so.6 libstdc++.so.6.old
+sudo mv libstdc++.so.6.0.17 libstdc++.so.6.0.17.old 
+```
+이렇게 하면 matlab의 rendering이 제대로 잡힘.
 
-<<<<<<< HEAD
+
 ## Ubuntu ssh server setting
 
 맥과 우분투 모두 ssh는 기본으로 인스톨 되어있다.  
@@ -291,24 +309,4 @@ tmux ls
 tmux attach -t 0
 ```
 명령어로 tmux 화면으로 다시 돌아갈 수 있음.
-=======
-```bash
-locate libstdc++.so.6
-```
-를 쳐서, matlab 위치를 찾는다. 나같은 경우
-```bash
-/usr/local/MATLAB/R2016a/sys/os/glnxa64/libstdc++.so.6
-/usr/local/MATLAB/R2016a/sys/os/glnxa64/libstdc++.so.6.0.17
-```
-이었음.
-```bash
-/usr/local/MATLAB/R2016a/sys/os/glnxa64
-```
-로 가서 파일이름을 바꿔줌.
-```bash
-sudo mv libstdc++.so.6 libstdc++.so.6.old
-sudo mv libstdc++.so.6.0.17 libstdc++.so.6.0.17.old 
-```
-이렇게 하면 matlab의 rendering이 제대로 잡힘.
->>>>>>> 3f7e127a803e19659ca1b7227ce74affe5dc0f48
 
