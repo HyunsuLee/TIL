@@ -270,12 +270,22 @@ Host *
 
 ### ssh server remote setting  
 외부에서도 서버에 접속하기 위해서는 공유기 port forwarding을 쓰면 된다.  
-공유기 setting에서 서버 ip를 잡고, port를 외부, 내부 모두 22(ssh)로 잡아줌.  
+공유기 setting에서 서버 ip를 잡고, port를 ~~외부~~, 내부 모두 22(ssh)로 잡아줌.
+(대학 전산망이 port 22는 filtering해서 안됨.)  
+closed port 중에 숫자가 큰걸 외부 port로 잡았음(port ????)  
+
 이러면 공유기 ip로 접속된 ssh가 공유기 하의 서버 ip로 넘어감.  
 ```bash
-ssh your_id@server_ip
+ssh -p ???? your_id@server_ip
 ```
 로 간단하게 외부망에서도 접근할 수 있음.(집에서 테스트해볼것)  
+
+### ssh server log 시도 파일 보기
+그중에서 실패한 시도들만 따로 보는 방법
+```bash
+server $ tail /var/log/auth.log -n 100 | grep 'Failed'
+```
+
 
 __jupyter notebook__  
 참고 [블로그](http://www.justinkiggins.com/blog/zero-configuration-remote-jupyter-server/)  
