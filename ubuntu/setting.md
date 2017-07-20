@@ -237,36 +237,25 @@ sudo mv libstdc++.so.6.0.17 libstdc++.so.6.0.17.old
 ssh username@hostip
 ```
 나는 서버의 내 계정과 서버 ip를 바로 사용했지만 서버에서 사용자 list를 관리할 수 있다.  
-
-spyder나 pycharm같은 GUI를 실행시킬려면 맥에서 XQuartz안에서 스크린 공유하는 것처럼 실행시킬 수 있다.  
-이걸 위해서는 다음과 같이 입력한다.
+### RSA key 만들고 쓰기.
 ```bash
-ssh -v -Y username@hostip
+client $ ssh-keygen -t rsa
 ```
-
-X11 server를 띄우는 방법인데, 이렇게 하려면 다음과 같은 선행조건을 만족시켜야한다.  
-
-
-__ᅟServer side__
-* xauth가 있어야함(xauth info로 확인)
-* /etc/ssh/sshd_config 파일에서
+rsa 키를 만들어주면.  
+* ~/.ssh/id_rsa : private key
+* ~/.ssh/id_rsa.pub : public key  
+가 만들어진다. (내 맥북에는 이미 있음)  
+이중 public key를 서버로 카피해야함.  
+```bash
+client $ scp .ssh/id_rsa.pub yourid@server_ip:.ssh/authorized_keys
+```
+클라이언트 키에 pass phrase을 입력했을 경우  
+ssh server에 접속할때마다 rsa key pass phrase를 입력하는 게 귀찮다면 
 ```bash
-X11Forwarding yes
-X11DisplayOffset 10
-X11UseLocalhost no
+client $ ssh-add
+     input : pass phrase?
 ```
-가 되어있어야한다.  
-
-
-__Client side__
-* /etc/ssh/ssh_config file에서
-```bash
-Host *
-  ForwardAgent yes
-  ForwardX11 yes
-```
-라고 되어있어야한다.  
-하지만 XQuartz가 구리므로 그냥 terminal로만 돌리자.  클라이언트 config에서 위 사항을 주석 처리 하면 -v -Y를 붙이지 않고 접속할 수 있다.
+해두면 안 묻더라.  
 
 ### ssh server remote setting  
 외부에서도 서버에 접속하기 위해서는 공유기 port forwarding을 쓰면 된다.  
@@ -279,6 +268,22 @@ Host *
 ssh -p ???? your_id@server_ip
 ```
 로 간단하게 외부망에서도 접근할 수 있음.(집에서 테스트해볼것)  
+
+## Remote setting하면 보안에 신경써야함.
+### sshd config file 
+etc/ssh/sshd_config에 다음과 같은 세팅을 제대로 해두자.
+```bash
+Protocol 2 # Protocol 1은 보안이슈가 있다. 보통 기본임.
+AllowUsers root vivek jerry #특정 유저만 허용, DenyUsers를 써사 ban하는 방법도.
+ClientAliveInterval 300 # 300sec까지만 허용.
+ClientAliveCountMax 0 
+IgnoreRhosts yes #기본으로 되어있음.
+HostbasedAuthentication no #기본으로 되어있음.
+Banner /etc/issue.net #접속시 경고 배너 띄우기. 난 안 쓴다.
+PermitEmptyPasswords no #기본으로 되어있음.
+LogLevel INFO #기본으로 되어있음.
+PasswordAuthentication no #RSA key를 쓰면 이건 꺼두자.
+```
 
 ### ssh server log 시도 파일 보기
 그중에서 실패한 시도들만 따로 보는 방법
@@ -320,3 +325,32 @@ tmux attach -t 0
 ```
 명령어로 tmux 화면으로 다시 돌아갈 수 있음.
 
+### ~~GUI실행~~ 구리니까 쓰지말자.
+spyder나 pycharm같은 GUI를 실행시킬려면 맥에서 XQuartz안에서 스크린 공유하는 것처럼 실행시킬 수 있다.  
+이걸 위해서는 다음과 같이 입력한다.
+```bash
+ssh -v -Y username@hostip
+```
+
+X11 server를 띄우는 방법인데, 이렇게 하려면 다음과 같은 선행조건을 만족시켜야한다.  
+
+__ᅟServer side__
+* xauth가 있어야함(xauth info로 확인)
+* /etc/ssh/sshd_config 파일에서
+```bash
+X11Forwarding yes
+X11DisplayOffset 10
+X11UseLocalhost no
+```
+가 되어있어야한다.  
+
+
+__Client side__
+* /etc/ssh/ssh_config file에서
+```bash
+Host *
+  ForwardAgent yes
+  ForwardX11 yes
+```
+라고 되어있어야한다.  
+하지만 XQuartz가 구리므로 그냥 terminal로만 돌리자.  클라이언트 config에서 위 사항을 주석 처리 하면 -v -Y를 붙이지 않고 접속할 수 있다.
