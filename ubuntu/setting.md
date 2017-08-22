@@ -354,3 +354,13 @@ Host *
 ```
 라고 되어있어야한다.  
 하지만 XQuartz가 구리므로 그냥 terminal로만 돌리자.  클라이언트 config에서 위 사항을 주석 처리 하면 -v -Y를 붙이지 않고 접속할 수 있다.
+
+## __GUI를 우분투끼리 실행시키면 쓸만함.__
+
+## 새로온 우분투 서버관련
+python3 path가 잘못잡혀있었다. root 계정과 miruware 계정이 다른 python path를 잡고 있었음. 
+```bash
+$ vim ~/.bashrc
+export PATH = "/usr/local/lib/python2.7/dist-packages$PATH"
+export PATH = "/usr/local/lib/python3.4/dist-packages$PATH"
+```
