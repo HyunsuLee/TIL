@@ -274,7 +274,7 @@ ssh -p ???? your_id@server_ip
 etc/ssh/sshd_config에 다음과 같은 세팅을 제대로 해두자.
 ```bash
 Protocol 2 # Protocol 1은 보안이슈가 있다. 보통 기본임.
-AllowUsers root vivek jerry #특정 유저만 허용, DenyUsers를 써사 ban하는 방법도.
+AllowUsers root vivek jerry #특정 유저만 허용, DenyUsers를 써서 ban하는 방법도.
 ClientAliveInterval 300 # 300sec까지만 허용.
 ClientAliveCountMax 0 
 IgnoreRhosts yes #기본으로 되어있음.
@@ -363,4 +363,14 @@ python3 path가 잘못잡혀있었다. root 계정과 miruware 계정이 다른 
 $ vim ~/.bashrc
 export PATH = "/usr/local/lib/python2.7/dist-packages$PATH"
 export PATH = "/usr/local/lib/python3.4/dist-packages$PATH"
+```
+
+## rsync bakcup
+시스템 전부를 백업할때는 /(root directory) 중 몇군데는 빼야한다. 무한루프에 빠질 수 있기때문에.
+```bash
+sudo -H rsync -aAXv --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/data1/*,/data2/*,/data3/*} / /data3/backup
+```
+데스크탑에서 서버로 작업한 걸 옮길때도 rsync를 쓰는데, ssh로 작업한다.
+```
+rsync -avzhe ssh ~/Documents/ miruware@192.168.0.11:~/Documents/ 
 ```
