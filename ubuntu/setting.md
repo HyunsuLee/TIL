@@ -372,5 +372,6 @@ sudo -H rsync -aAXv --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media
 ```
 데스크탑에서 서버로 작업한 걸 옮길때도 rsync를 쓰는데, ssh로 작업한다.
 ```
-rsync -avzhe ssh ~/Documents/ miruware@192.168.0.11:~/Documents/ 
+rsync -avzhe ssh ~/Documents/ miruware@192.168.0.11:~/Documents/
+rsync -avzhe ssh /media/hyunsu/data\ HDD/01.Data\&Analysis/ miruware@192.168.0.11:/data1/DataAnalysis/
 ```
