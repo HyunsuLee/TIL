@@ -309,6 +309,13 @@ port 8888로 띄운걸, client에서 ssh로 접속해서 땡겨옴.
 client $ ssh -NL 8888:localhost:8888 your_id@server_ip
 ```
 다음 내 브라우저에서 localhost:8888을 띄우면 server의 주피터가 뜸.
+__notebook theme__
+참고 [GitHub](https://github.com/dunovank/jupyter-themes)
+```bash
+$ jt -t chesterish -f roboto -fs 11 -nf robotosans -nfs 12 -ofs 10 -dfs 10 -tf robotosans -tfs 12 -T
+```
+dark theme(chesterish)에 code font roboto(11), markdown font robotosans(12).  
+notebook font robotosans(12), output&pandas fontsize(10)으로 설정. 
 
 ## Using tmux
 우분투서버에 터미널로 접속한다음. 한 터미널 윈도우에서 멀티 세션을 돌리고 싶을때 쓴다.  
