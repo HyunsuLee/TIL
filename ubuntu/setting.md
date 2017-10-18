@@ -90,7 +90,34 @@ $~sudo reboot
 ```
 그럼 이제 가상터미널에서 lightdm을 stop해도 화면이 보인다.
 
+## 모니터 먹통 현상 해결
+### input source 바꾸기 등으로 우분투로 부터의 display가 안뜰때
+ctrl + alt + F1 으로 가상터미널로 들어가 display가 뜨는걸 확인하고(~~optional~~ display output을 refresh 필수인듯)
 
+ctrl + alt + F7 으로 GUI환경으로 다시 돌아 온다.
+
+## R설치
+terminal 에서  update용 sourcelist에 CRAN mirror를 등록하기
+
+deb http://cran.biodisk.org/bin/linux/ubuntu trusty/
+
+로 하는게 젤 빠름.(대구-울산)
+
+참고한 [블로그](http://r.fossa.kr/?p=58), [CRAN 공식문서](https://cran.r-project.org/bin/linux/ubuntu/README)
+
+## Rstudio로 Git version 관리
+github에 내 SSH키를 등록 시켜야함.
+
+https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/  
+
+터미널에서 한번 작업을 해줘야함. HTTP가 아닌 SSH방식으로  
+git config remote.origin.url git@github.com:HyunsuLee/???.git  
+git pull origin master  
+git push origin master  
+
+모든 git repository에 대해 작업 해줘야하는 듯.  
+repository를 clone할때부터 SSH방식을 쓰면 될듯. 
+ 
 ## allensdk
 현재 document에 python notebook file들을 받아 test중.
 그중 biophysical model은 [NEURON](http://www.neuron.yale.edu./neuron/download/compile_linux#step2)이 있어야 기능함.  
