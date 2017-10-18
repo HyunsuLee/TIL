@@ -20,3 +20,23 @@ git status
 ```
 git checkout FILENAME
 ```
+## Git에 실수로 덩치 큰 파일을 commit했을 경우.
+.gitignore에 확실하게 파일은 ignore하도록 해서 커밋한다.  
+그러고 cach file을 지운다.  
+```bash
+git rm -r --cached
+git add .
+```
+이렇게 해도 git history object에는 덩치 큰 파일이 들어가 있다.  
+commit history도 손을 대야하는데 여기서부터  
+__!!!warning!!!__  
+잘못하면 local file까지도 날린다.  
+__반드시 백업하고 할것!!__
+```bash
+git filter-branch -f --index-filter 'git rm --cached --ignore-unmatch */*/*.ckpt.*'
+```
+난 텐서플로 모델을 지우기 위해 파일네임을 위와 같이 썼다.  
+만약 . 이나 *을 잘못쓰면 해당조건에 해당하는 모든 파일이 지워진다. 
+```bash
+git push -f #GitHub remote도 정리할땐 forced push를 한다.
+```
