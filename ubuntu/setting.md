@@ -325,7 +325,7 @@ server $ tail /var/log/auth.log -n 100 | grep 'Failed'
 ```
 
 
-__jupyter notebook__  
+## jupyter notebook 관련  
 참고 [블로그](http://www.justinkiggins.com/blog/zero-configuration-remote-jupyter-server/)  
 서버에서 주피터를 브라우저 없이 띄운다
 ```bash
@@ -335,14 +335,28 @@ port 8888로 띄운걸, client에서 ssh로 접속해서 땡겨옴.
 ```bash
 client $ ssh -NL 8888:localhost:8888 your_id@server_ip
 ```
-다음 내 브라우저에서 localhost:8888을 띄우면 server의 주피터가 뜸.
-__notebook theme__
+다음 내 브라우저에서 localhost:8888을 띄우면 server의 주피터가 뜸.  
+
+__notebook theme__  
 참고 [GitHub](https://github.com/dunovank/jupyter-themes)
 ```bash
 $ jt -t chesterish -f roboto -fs 11 -nf robotosans -nfs 12 -ofs 10 -dfs 10 -tf robotosans -tfs 12 -T
 ```
 dark theme(chesterish)에 code font roboto(11), markdown font robotosans(12).  
 notebook font robotosans(12), output&pandas fontsize(10)으로 설정. 
+
+__notebook extension__  
+참고 [GitHub](https://github.com/ipython-contrib/jupyter_contrib_nbextensions) 
+
+```bash
+#install
+$ pip install jupyter_contrib_nbextensions
+$ jupyter contrib nbextension install --user #extension들 인스톨
+$ pip install jupyter_nbextensions_configurator #extension켜고 끄는 extension 인스톨
+$ jupyter nbextensions_configurator enable --user #configurator들 켜기. 
+```
+이렇게 하면 notebook GUI에서 extensions을 찾아 켜고 끌 수 있다.
+
 
 ## Using tmux
 우분투서버에 터미널로 접속한다음. 한 터미널 윈도우에서 멀티 세션을 돌리고 싶을때 쓴다.  
