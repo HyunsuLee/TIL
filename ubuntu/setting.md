@@ -252,7 +252,7 @@ rsa 키를 만들어주면.
 * ~/.ssh/id_rsa.pub : public key  
 가 만들어진다. (내 맥북에는 이미 있음)  
 이중 public key를 서버로 카피해야함.  
-```bash
+```bash
 client $ scp .ssh/id_rsa.pub yourid@server_ip:.ssh/authorized_keys
 ```
 클라이언트 키에 pass phrase을 입력했을 경우  
@@ -264,16 +264,16 @@ client $ ssh-add
 해두면 안 묻더라.  
 
 ### ssh server remote setting  
-외부에서도 서버에 접속하기 위해서는 공유기 port forwarding을 쓰면 된다.  
+외부에서도 서버에 접속하기 위해서는 공유기 port forwarding을 쓰면 된다.  
 공유기 setting에서 서버 ip를 잡고, port를 ~~외부~~, 내부 모두 22(ssh)로 잡아줌.
 (대학 전산망이 port 22는 filtering해서 안됨.)  
-closed port 중에 숫자가 큰걸 외부 port로 잡았음(port ????)  
+closed port 중에 숫자가 큰걸 외부 port로 잡았음(port ????)  
 
 이러면 공유기 ip로 접속된 ssh가 공유기 하의 서버 ip로 넘어감.  
 ```bash
 ssh -p ???? your_id@server_ip
 ```
-로 간단하게 외부망에서도 접근할 수 있음.(집에서 테스트해볼것)  
+로 간단하게 외부망에서도 접근할 수 있음.(테스트 통과)  
 
 ## Remote setting하면 보안에 신경써야함.
 ### sshd config file 
@@ -308,7 +308,7 @@ port 8888로 띄운걸, client에서 ssh로 접속해서 땡겨옴.
 ```bash
 client $ ssh -NL 8888:localhost:8888 your_id@server_ip
 ```
-다음 내 브라우저에서 localhost:8888을 띄우면 server의 주피터가 뜸.
+다음 내 브라우저에서 localhost:8888을 띄우면 server의 주피터가 뜸.
 __notebook theme__
 참고 [GitHub](https://github.com/dunovank/jupyter-themes)
 ```bash
@@ -325,7 +325,7 @@ tmux를 실행시키고 명령어를 입력하는 것을 ctrl+b를 먼저 살짝
 % : 좌우로 pane나누기  
 " : 아래위로 pane나누기  
 화살표 : pane 사이를 이동하기  
-z : 현재 pane을 full size로 키우기. 한번더 누르면 원래 사이즈로  
+z : 현재 pane을 full size로 키우기. 한번더 누르면 원래 사이즈로  
 ctrl+d : pane 닫기  
 c : 윈도우 하나 더 띄우기  
 p, n : 전, 후 윈도우로 이동  
@@ -347,7 +347,7 @@ ssh -v -Y username@hostip
 
 X11 server를 띄우는 방법인데, 이렇게 하려면 다음과 같은 선행조건을 만족시켜야한다.  
 
-__ᅟServer side__
+__Server side__
 * xauth가 있어야함(xauth info로 확인)
 * /etc/ssh/sshd_config 파일에서
 ```bash
@@ -366,7 +366,7 @@ Host *
   ForwardX11 yes
 ```
 라고 되어있어야한다.  
-하지만 XQuartz가 구리므로 그냥 terminal로만 돌리자.  클라이언트 config에서 위 사항을 주석 처리 하면 -v -Y를 붙이지 않고 접속할 수 있다.
+하지만 XQuartz가 구리므로 그냥 terminal로만 돌리자. 클라이언트 config에서 위 사항을 주석 처리 하면 -v -Y를 붙이지 않고 접속할 수 있다.
 
 ## __GUI를 우분투끼리 실행시키면 쓸만함.__
 __ssh setting을 바꿔 준 다음에는 ssh server restart해야함__  
