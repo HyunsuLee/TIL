@@ -422,6 +422,28 @@ $ vim ~/.bashrc
 export PATH = "/usr/local/lib/python2.7/dist-packages$PATH"
 export PATH = "/usr/local/lib/python3.4/dist-packages$PATH"
 ```
+## 우분투 swap잡기
+새로운 서버에 swap없었음. 
+```bash 
+$ sudo swapon -s # checking swap
+```
+없다면, 생성해주자.
+```bash
+$ sudo fallocate -l 32GB /swapfile
+$ sudo chmod 600 /swapfile
+$ sudo mkswap /swapfile
+$ sudo swapon /swapfile
+$ sudo swapon -s # checking swap
+```
+부팅시에도 잡아줘야하므로
+```bash
+$ sudo vi /etc/sftab
+/swapfile   none swap   0    0  # in editor
+$ sudo vi /etc/sysctl.conf
+vm.swappiness = 10 # in editor
+$ sudo sysctl -p
+```
+
 
 ## rsync bakcup
 시스템 전부를 백업할때는 /(root directory) 중 몇군데는 빼야한다. 무한루프에 빠질 수 있기때문에.
