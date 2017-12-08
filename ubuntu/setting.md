@@ -537,20 +537,30 @@ $ vim ~/.bashrc
 export PATH = "/usr/local/lib/python2.7/dist-packages$PATH"
 export PATH = "/usr/local/lib/python3.4/dist-packages$PATH"
 ```
+
 ## 우분투 swap잡기
-새로운 서버에 swap없었음. 
-```bash 
+
+새로운 서버에 swap없었음.
+
+```bash
 $ sudo swapon -s # checking swap
+Filename    Type  Size  Used  Priority
 ```
+
 없다면, 생성해주자.
+
 ```bash
 $ sudo fallocate -l 32GB /swapfile
 $ sudo chmod 600 /swapfile
 $ sudo mkswap /swapfile
 $ sudo swapon /swapfile
 $ sudo swapon -s # checking swap
+Filename    Type  Size  Used  Priority
+/swapfile  file  31249996 0    -1
 ```
+
 부팅시에도 잡아줘야하므로
+
 ```bash
 $ sudo vi /etc/sftab
 /swapfile   none swap   0    0  # in editor
@@ -560,13 +570,16 @@ $ sudo sysctl -p
 ```
 
 ## tensorflow hanging during computation
-cifar10_multi_gpu tutorial test중에 연산하다가 자꾸 멈추는 현상이 지속됨  
-[비슷한 보고](https://github.com/tensorflow/tensorflow/issues/1947), [또 다른 보고](https://github.com/tensorflow/tensorflow/issues/8696) 등이 있음. 종합해본 결과 ASUS motherboard의 PCIe와 nvidia card 가 서로 궁합이 안맞는 것으로 추정.  
 
-#### 해결
+cifar10_multi_gpu tutorial test중에 연산하다가 자꾸 멈추는 현상이 지속됨
+[비슷한 보고](https://github.com/tensorflow/tensorflow/issues/1947), [또 다른 보고](https://github.com/tensorflow/tensorflow/issues/8696) 등이 있음. 종합해본 결과 ASUS motherboard의 PCIe와 nvidia card 가 서로 궁합이 안맞는 것으로 추정.
+
+### 해결
+
 1. [ASUS bios update](https://www.asus.com/Commercial-Servers-Workstations/X99E_WS/HelpDesk_BIOS/) 내껀 ASUS X99E WS임. 업데이트는 USB에 cap 파일을 담아서 재부팅때 BIOS에 들어가서 해줌. 업데이트 하면서 BIOS setting CPU를 performance mode로 바꿈.
 1. [nvidia driver update](http://www.nvidia.com/Download/index.aspx)
 1. [grub setting 바꾸기](https://www.pugetsystems.com/labs/hpc/Install-Ubuntu-16-04-or-14-04-and-CUDA-8-and-7-5-for-NVIDIA-Pascal-GPU-825/)
+
 ```bash
 $ sudo vi /etc/default/grub
 LINUX_.....="net.ifnames=0 biosdevname=0 pcie_aspm=off" # in editor deleted "quiet splash"
