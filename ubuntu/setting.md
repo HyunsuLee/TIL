@@ -315,6 +315,17 @@ sudo mv libstdc++.so.6.0.17 libstdc++.so.6.0.17.old
 
 이렇게 하면 matlab의 rendering이 제대로 잡힘.
 
+## high resolution display vs Application issue
+
+matlab의 경우, matlab command에서 다음과 같이 입력하면 해결.
+
+```bash
+>> s = settings;s.matlab.desktop.DisplayScaleFactor
+>> s.matlab.desktop.DisplayScaleFactor.PersonalValue = 2
+```
+
+[참고 문서](https://wiki.archlinux.org/index.php/HiDPI#MATLAB)
+
 ## Ubuntu ssh server setting
 
 맥과 우분투 모두 ssh는 기본으로 인스톨 되어있다.
