@@ -135,6 +135,17 @@ git push origin master
 
 GitHub은 HTTP를 추천한다.
 
+### Git fork syncing
+
+```bash
+git remote -v # upstream repository check. 
+# 없다면, 
+# git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
+git fetch upstream
+git checkout master
+git merge upstream/master
+```
+
 ## allensdk
 
 현재 document에 python notebook file들을 받아 test중.
