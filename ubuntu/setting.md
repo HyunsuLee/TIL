@@ -47,6 +47,32 @@ server $ bash pycharm.sh
 ~~일단 피씨 본체의 reset 버튼으로 강제 리부팅을 하면 날아 가는듯하다~~  
 ~~(모니터 Input source 때문에 몇번 리부팅했을때 괜찮은 걸보면 GPU 컴퓨팅 중에 하면 날아가는듯)~~
 
+## CUDA 여러version 쓰기
+
+* CUDA 9.0을 깔고, python3.5, tensorflow1.5 환경을 구축했다.
+* 하지만 python2.7, tensorflow1.0을 유지하려면 CUDA8.0을 써야함.
+* 참고로 CUDA toolkit 만 깔땐 lighdm stop필요없음. nvidia driver 깔때 필요함.
+* nvidia driver 깔때 X server option에서 yes. no를 하면 무한 로그인현상 발생.
+
+__CUDA 여러 version을 쓰기위해선 symbolic link를 바꿀 필요가 있다.__
+__다음과 같이 바꾼다.__
+
+```bash
+sudo rm /usr/local/cuda # 기존 symbolic link 삭제
+sudo ln -sT /usr/local/cuda-8.0 /usr/local/cuda # 새로운 symbolic link 형성
+```
+
+## CUDNN libray command line에서 깔기.
+
+* 아마 home directory ~/cuda에 CUDNN이 생성되어 있을것이다. 이것을 현재 CUDA version에 덮어 준다.
+* __주의, 현재 CUDA version을 symbolic link로 가서 확인하라.__
+
+```bash
+sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
+```
+
 ## CUDA가 날아갔을때
 
 1. 재부팅후 ctrl+alt+F1으로 가상터미널 접속
