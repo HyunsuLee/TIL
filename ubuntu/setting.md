@@ -635,6 +635,28 @@ $ sudo vi /etc/default/grub
 LINUX_.....="net.ifnames=0 biosdevname=0 pcie_aspm=off" # in editor deleted "quiet splash"
 ```
 
+## remote server tensorboard 사용하기
+
+* 내 local machine에서
+
+```bash
+ssh -N -f -L localhost:16006:localhost:6006 <user@remote>
+```
+
+* server에서
+
+```bash
+tensorboard --logdir <path>
+```
+
+* 내 local machine 브라우저에서 localhost:16006 하면됨.
+
+* ᅟserver에서 locale 설정 오류가 나곤 하는데.
+
+```bash
+export LC_ALL=C
+```
+
 ## rsync bakcup
 
 시스템 전부를 백업할때는 /(root directory) 중 몇군데는 빼야한다. 무한루프에 빠질 수 있기때문에.
