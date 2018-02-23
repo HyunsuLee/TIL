@@ -517,6 +517,8 @@ $ jupyter nbextensions_configurator enable --user #configurator들 켜기.
 
 tmux를 실행시키고 명령어를 입력하는 것을 ctrl+b를 먼저 살짝 눌렀다 떼면 된다.
 
+현재 tmux prefix는 ctrl+a로 바꿔둠.[참고](http://www.hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/)
+
 * ? : help 화면
 * % : 좌우로 pane나누기
 * " : 아래위로 pane나누기
