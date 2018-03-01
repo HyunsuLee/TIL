@@ -407,7 +407,7 @@ server $ cat ~/Documents/id_rsa.pub >> authorized_keys
 
 클라이언트 키에 pass phrase을 입력했을 경우
 
-ssh server에 접속할때마다 rsa key pass phrase를 입력하는 게 귀찮다면
+ssh server에 접속할때마다 rsa key pass phrase를 입력하는 게 귀찮다면
 
 ```bash
 client $ ssh-add
@@ -643,7 +643,7 @@ LINUX_.....="net.ifnames=0 biosdevname=0 pcie_aspm=off" # in editor deleted "qui
 ssh -N -f -L localhost:16006:localhost:6006 <user@remote>
 ```
 
-* server에서
+*  server에서
 
 ```bash
 tensorboard --logdir <path>
