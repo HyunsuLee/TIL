@@ -44,7 +44,7 @@ server $ bash pycharm.sh
 * __만약 dist-uprade를 해서 그래픽 드라이버를 인식못하면, nvidia driver만 다시 깔면됨__
 * __CUDA는 건드리지 말것.__
 
-~~일단 피씨 본체의 reset 버튼으로 강제 리부팅을 하면 날아 가는듯하다~~  
+~~일단 피씨 본체의 reset 버튼으로 강제 리부팅을 하면 날아 가는듯하다~~
 ~~(모니터 Input source 때문에 몇번 리부팅했을때 괜찮은 걸보면 GPU 컴퓨팅 중에 하면 날아가는듯)~~
 
 ## CUDA 여러version 쓰기
@@ -62,7 +62,7 @@ sudo rm /usr/local/cuda # 기존 symbolic link 삭제
 sudo ln -sT /usr/local/cuda-8.0 /usr/local/cuda # 새로운 symbolic link 형성
 ```
 
-## CUDNN libray command line에서 깔기.
+## CUDNN libray command line에서 깔기
 
 * 아마 home directory ~/cuda에 CUDNN이 생성되어 있을것이다. 이것을 현재 CUDA version에 덮어 준다.
 * __주의, 현재 CUDA version을 symbolic link로 가서 확인하라.__
@@ -164,8 +164,8 @@ GitHub은 HTTP를 추천한다.
 ### Git fork syncing
 
 ```bash
-git remote -v # upstream repository check. 
-# 없다면, 
+git remote -v # upstream repository check.
+# 없다면,
 # git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
 git fetch upstream
 git checkout master
@@ -347,7 +347,7 @@ locate libstdc++.so.6
 
 ```bash
 sudo mv libstdc++.so.6 libstdc++.so.6.old
-sudo mv libstdc++.so.6.0.17 libstdc++.so.6.0.17.old 
+sudo mv libstdc++.so.6.0.17 libstdc++.so.6.0.17.old
 ```
 
 이렇게 하면 matlab의 rendering이 제대로 잡힘.
@@ -391,7 +391,7 @@ rsa 키를 만들어주면.
 이중 public key를 서버로 카피해야함.
 
 ```bash
-# client $ scp .ssh/id_rsa.pub your_id@server_ip:.ssh/authorized_keys 
+# client $ scp .ssh/id_rsa.pub your_id@server_ip:.ssh/authorized_keys
 # 이렇게 하면 한 대의 클라언트 컴퓨터의 key만 으로 overwrite되어 버림.
 client $ ssh-copy-id your_id@server_ip
 ```
@@ -433,9 +433,9 @@ ssh -p ???? your_id@server_ip
 
 로 간단하게 외부망에서도 접근할 수 있음.(테스트 통과)
 
-## Remote setting하면 보안에 신경써야함.
+## Remote setting하면 보안에 신경써야함
 
-### sshd config file 
+### sshd config file
 
 etc/ssh/sshd_config에 다음과 같은 세팅을 제대로 해두자.
 
@@ -443,7 +443,7 @@ etc/ssh/sshd_config에 다음과 같은 세팅을 제대로 해두자.
 Protocol 2 # Protocol 1은 보안이슈가 있다. 보통 기본임.
 AllowUsers root vivek jerry #특정 유저만 허용, DenyUsers를 써서 ban하는 방법도.
 ClientAliveInterval 300 # 300sec까지만 허용.
-ClientAliveCountMax 0 
+ClientAliveCountMax 0
 IgnoreRhosts yes #기본으로 되어있음.
 HostbasedAuthentication no #기본으로 되어있음.
 Banner /etc/issue.net #접속시 경고 배너 띄우기. 난 안 쓴다.
@@ -489,7 +489,7 @@ client $ ssh -NL 8888:localhost:8888 your_id@server_ip
 참고 [GitHub](https://github.com/dunovank/jupyter-themes)
 
 ```bash
-$ jt -t chesterish -f roboto -fs 11 -nf robotosans -nfs 12 -ofs 10 -dfs 10 -tf robotosans -tfs 12 -T
+jt -t chesterish -f roboto -fs 11 -nf robotosans -nfs 12 -ofs 10 -dfs 10 -tf robotosans -tfs 12 -T
 ```
 
 dark theme(chesterish)에 code font roboto(11), markdown font robotosans(12).
@@ -497,14 +497,14 @@ notebook font robotosans(12), output&pandas fontsize(10)으로 설정.
 
 ### notebook extension
 
-참고 [GitHub](https://github.com/ipython-contrib/jupyter_contrib_nbextensions) 
+참고 [GitHub](https://github.com/ipython-contrib/jupyter_contrib_nbextensions)
 
 ```bash
 #install
 $ pip install jupyter_contrib_nbextensions
 $ jupyter contrib nbextension install --user #extension들 인스톨
 $ pip install jupyter_nbextensions_configurator #extension켜고 끄는 extension 인스톨
-$ jupyter nbextensions_configurator enable --user #configurator들 켜기. 
+$ jupyter nbextensions_configurator enable --user #configurator들 켜기.
 ```
 
 이렇게 하면 notebook GUI에서 extensions을 찾아 켜고 끌 수 있다.
@@ -538,7 +538,7 @@ tmux attach -t 0
 
 명령어로 tmux 화면으로 다시 돌아갈 수 있음.
 
-### ~~GUI실행~~ 구리니까 쓰지말자.
+### ~~GUI실행~~ 구리니까 쓰지말자
 
 spyder나 pycharm같은 GUI를 실행시킬려면 맥에서 XQuartz안에서 스크린 공유하는 것처럼 실행시킬 수 있다.
 
@@ -655,6 +655,15 @@ tensorboard --logdir <path>
 
 ```bash
 export LC_ALL=C
+```
+
+* 영구적으로 locale 설정을 위해서
+
+```bash
+$ sudo vi /etc/default/locale
+# insert following line(according to locale error messages)
+LC_ALL="en_US.UTF-8"
+LANGUAGE="en_US.UTF-8"
 ```
 
 ## rsync bakcup
