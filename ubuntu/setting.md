@@ -708,3 +708,11 @@ sudo -H rsync -aAXv --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media
 rsync -avzhe ssh ~/Documents/ miruware@192.168.0.11:~/Documents/
 rsync -avzhe ssh /media/hyunsu/data\ HDD/01.Data\&Analysis/ miruware@192.168.0.11:/data1/DataAnalysis/
 ```
+
+mac OSX에서는 *를 붙여주어야 함. DevonDB를 빼고 싶었으나, 잘 안됨..
+
+```bash
+rsync -avzhe /Volumes/Storage/* /Volumes/HDD3/*
+```
+
+또한 일부 파일에 대해 permission이 없는듯한데,(이거 때문에 finder에서 복사가 안된듯) 해결방법을 모르겠음.
