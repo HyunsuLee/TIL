@@ -716,5 +716,3 @@ sudo rsync -avzhe /Volumes/Storage/* /Volumes/HDD3/*
 ```
 
 또한 일부 파일에 대해 permission이 없는듯한데,(이거 때문에 finder에서 복사가 안된듯) 해결방법을 모르겠음.
-
-$$ \alpha+\beta\cdot\delta $$
