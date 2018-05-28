@@ -43,3 +43,7 @@
 * Min-Max Scaling.
 
 $$ X_{norm}=\frac{X-X_{min}}{X_{max}-X_{min}} $$
+
+* RELU, linear transformation, Batchnormalization
+
+$$ O_{l}=argmax(0, BatchNorm(W \cdot X_{l})) $$
