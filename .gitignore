@@ -5,3 +5,6 @@
 */.idea/
 .idea/
 .rhistory
+.aux
+.log
+.pdf
