@@ -36,6 +36,8 @@
 
 # Math annotation 연습용
 
+## Markdown의 Math 문법은 LATEX문법과 같음
+
 ## allen project 논문 삽입
 
 ### Methods for ANN
