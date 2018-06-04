@@ -17,11 +17,16 @@
 
 * VScode에서 markdown 형식으로 작성 후 확인 -> C&P
 
-### Formatting
+### Formatting #1
 
-* Manuscript로 옮김. -> Markdown 수식을 formatting 해준다.
+* Manuscript로 옮김. -> Markdown(LATEX) 수식을 formatting 해준다.
 * Target journal 에 맞춰 형식을 맞춘다.(introduction 등의 heading 처리와 subheading 처리)
 * Word로 다시 export하면, 수식과 양식이 맞춰짐.
+
+### Formatting #2
+
+* Word로 옳김. insert equation에서 Markdown(LATEX) 수식입력해준다.
+* Target journal에 맞춰 형식을 바꾼다. (Scrivener에서 가능한지 생각해볼 것)
 
 #### 참고 문헌 Formatting
 
@@ -49,3 +54,8 @@ $$ X_{norm}=\frac{X-X_{min}}{X_{max}-X_{min}} $$
 * RELU, linear transformation, Batchnormalization
 
 $$ O_{l}=argmax(0, BatchNorm(W \cdot X_{l})) $$
+
+* Weight initialization with the Xavier and He method
+
+$$ Var(W)=\frac{2}{n_{inputs}} $$
+
