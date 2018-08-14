@@ -1,7 +1,18 @@
+# vscode stuff
 .vscode/
+
+# python stuff
 */__pycache__/
+
+# R stuff
 .Rhistory
 */.Rhistory
+.rhistory
+
+# pycharm stuff
 */.idea/
 .idea/
-.rhistory
+
+# tex stuff
+*.aux
+*.log

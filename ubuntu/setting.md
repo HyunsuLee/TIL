@@ -262,6 +262,34 @@ xset m 8 2
 
 가속값을 8, 역치는 2픽셀로.
 
+## ubuntu mouse scroll setting
+
+```bash
+xinput list 
+```
+
+하면 mouse 이름이 뜸.
+
+```bash
+device=$(xinput list --id-only 'Logitech USB-PS/2 Optical Mouse')
+xinput list-props $device
+```
+
+하면 mouse setting 들이 나오는데, 내 경우는
+
+```bash
+Evdev Scrolling Distance (284):	-1, 1, 1
+```
+
+항목이 있음. 제일 앞의 수가 1이면 윈도우 스타일, -1이면 MAC 스타일  
+
+```bash
+xinput set-prop $device "Evdev Scrolling Distance" -1, 1, 1
+```
+
+이 setting을 고정하려면 ~/.bashrc 파일에 device= 항목과 set-prop항목을 추가하자.
+  
+
 ## ubuntu pycharm 설치
 
 ```bash
@@ -685,3 +713,18 @@ sudo -H rsync -aAXv --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media
 rsync -avzhe ssh ~/Documents/ miruware@192.168.0.11:~/Documents/
 rsync -avzhe ssh /media/hyunsu/data\ HDD/01.Data\&Analysis/ miruware@192.168.0.11:/data1/DataAnalysis/
 ```
+
+mac OSX에서는 *를 붙여주어야 함. DevonDB를 빼고 싶었으나, 잘 안됨..
+
+```bash
+sudo rsync -avzhe /Volumes/Storage/* /Volumes/HDD3/*
+```
+
+또한 일부 파일에 대해 permission이 없는듯한데,(이거 때문에 finder에서 복사가 안된듯) 해결방법을 모르겠음.
+
+## 동영상 변환
+
+```bash
+ffmpeg
+```
+[documentation](http://ffmpeg.org/ffmpeg.html#Video-Options)
