@@ -134,12 +134,17 @@ ctrl + alt + F7 으로 GUI환경으로 다시 돌아 온다.
 terminal 에서  update용 sourcelist에 CRAN mirror를 등록하기
 
 ```bash
-deb http://cran.biodisk.org/bin/linux/ubuntu trusty/
+deb http://cran.biodisk.org/bin/linux/ubuntu trusty/ # 16.04는 xenial
 ```
 
 로 하는게 젤 빠름.(대구-울산)
 
-참고한 [블로그](http://r.fossa.kr/?p=58), [CRAN 공식문서](https://cran.r-project.org/bin/linux/ubuntu/README)
+참고한 [CRAN 공식문서](https://cran.r-project.org/bin/linux/ubuntu/README)
+
+## R package
+
+* 기본적으로는 install.pakages 로 설치한다.
+* 만약 R version upgrade후에 기존의 R에서 쓰던 package를 그대로 옮기고 싶다면. ~/R/ folder안에 구버전에 있는 library들을 새 버전 R folder로 옮긴다. 겹치는건 skip.
 
 ## Rstudio로 Git version 관리
 
