@@ -714,6 +714,12 @@ rsync -avzhe ssh ~/Documents/ miruware@192.168.0.11:~/Documents/
 rsync -avzhe ssh /media/hyunsu/data\ HDD/01.Data\&Analysis/ miruware@192.168.0.11:/data1/DataAnalysis/
 ```
 
+다른 포트를 이용해야할 경우
+
+```bash
+rsync -avzhe 'ssh p $port_number' [origin] [destination]
+```
+
 mac OSX에서는 *를 붙여주어야 함. DevonDB를 빼고 싶었으나, 잘 안됨..
 
 ```bash
