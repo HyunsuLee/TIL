@@ -2,7 +2,7 @@
 
 ## 문헌 검색
 
-* Papers app.
+* ~~Papers app.~~ Bookend.app
 
 ## 논문 작성
 
@@ -10,8 +10,9 @@
 
 ### 참고 문헌 삽입
 
-* Papers app. 에서 endnote citation(command+shift+e)으로 citation key를 삽입
-* 삽입한 문헌은 keyword에 흔적을 남겨 따로 관리해줘야함.
+* ~~Papers app.~~ Bookend.app의 floating citation 단축기는 ctrl + ctrl.
+* 또는 {저자, 년도}로 바로 처넣기.
+* 삽입한 문헌은 keyword에 흔적을 남겨 따로 관리해줘야함. 나중에 endnote library로 export해야 word에서 endnote로 style관리할 수 있음.
 
 ### 수식 삽입
 
@@ -19,7 +20,7 @@
 
 ### Formatting #1
 
-* Manuscript로 옮김. -> Markdown(LATEX) 수식을 formatting 해준다.
+* ~~Manuscript로 옮김.~~ -> Markdown(LATEX) 수식을 formatting 해준다.
 * Target journal 에 맞춰 형식을 맞춘다.(introduction 등의 heading 처리와 subheading 처리)
 * Word로 다시 export하면, 수식과 양식이 맞춰짐.
 
