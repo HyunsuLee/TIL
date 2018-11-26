@@ -19,5 +19,6 @@
 
 # python notebook stuff
 .ipynb_checkpoints/
-/.ipynb_checkpoints
+/.ipynb_checkpoints/
+*/.ipybn_checkpoints/
 **/.ipynb_checkpoints/
