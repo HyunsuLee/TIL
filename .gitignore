@@ -16,3 +16,8 @@
 # tex stuff
 *.aux
 *.log
+
+# python notebook stuff
+.ipynb_checkpoints/
+/.ipynb_checkpoints
+**/.ipynb_checkpoints/
