@@ -65,3 +65,12 @@ git push -f #GitHub remote도 정리할땐 forced push를 한다.
 git branch -d <branch_name>
 git push --delete <remote_name> <branch_name>
 ```
+
+## git ignore list
+
+git ignore for jupyter notebook
+
+```bash
+.ipynb_checkpoints
+*/.ipynb_checkpoints/
+```
