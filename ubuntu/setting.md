@@ -49,10 +49,45 @@ server $ bash pycharm.sh
 
 ## CUDA 여러version 쓰기
 
+### anaconda environment 명령어 활용
+
+* anaconda의 경우 environment를 (de)activation시킬 때마다 script를 자동으로 가동시킬 수 있다.
+* conda env name안에 아래와 같은 directory를 만들어주면 됨.
+
+```bash
+mkdir -p ~/anaconda3/envs/<env name>/etc/conda/activate.d
+mkdir -p ~/anaconda3/envs/<env name>/etc/conda/deactivate.d
+vim ~/anaconda3/envs/<env name>/etc/conda/activate.d/activate.sh
+vim ~/anaconda3/envs/<env name>/etc/conda/deactivate.d/deactivate.sh
+```
+
+* activate.sh에는 다음과 같이, cuda 9.0을 load하고 싶을 경우
+
+```bash
+ORIGINAL_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64
+```
+
+* cuda 10.0부터는 CUPTI로 load 해주자.
+
+```bash
+ORIGINAL_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64:/usr/local/cuda-10.0/extras/CUPTI/lib64
+```
+
+* deactivate.sh에는 원래 symbolic link로 돌려주는
+
+```bash
+export LD_LIBRARY_PATH=$ORIGINAL_LD_LIBRARY_PATH
+unset ORIGINAL_LD_LIBRARY_PATH
+```
+
+### 아래와 같은 해결책은 옛날 방식
+
 * CUDA 9.0을 깔고, python3.5, tensorflow1.5 환경을 구축했다.
 * 하지만 python2.7, tensorflow1.0을 유지하려면 CUDA8.0을 써야함.
 * 참고로 CUDA toolkit 만 깔땐 lighdm stop필요없음. nvidia driver 깔때 필요함.
-* nvidia driver 깔때 X server option에서 yes. no를 하면 무한 로그인현상 발생.
+* ~~nvidia driver 깔때 X server option에서 yes. no를 하면 무한 로그인현상 발생.~~
 
 __CUDA 여러 version을 쓰기위해선 symbolic link를 바꿀 필요가 있다.__
 __다음과 같이 바꾼다.__
@@ -66,6 +101,7 @@ sudo ln -sT /usr/local/cuda-8.0 /usr/local/cuda # 새로운 symbolic link 형성
 
 * 아마 home directory ~/cuda에 CUDNN이 생성되어 있을것이다. 이것을 현재 CUDA version에 덮어 준다.
 * __주의, 현재 CUDA version을 symbolic link로 가서 확인하라.__
+* __아예 적합한 버젼의 CUDA directory로 지정해주는게 나음.__
 
 ```bash
 sudo cp cuda/include/cudnn.h /usr/local/cuda/include
