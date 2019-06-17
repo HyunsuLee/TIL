@@ -53,6 +53,7 @@ server $ bash pycharm.sh
 
 * anaconda의 경우 environment를 (de)activation시킬 때마다 script를 자동으로 가동시킬 수 있다.
 * conda env name안에 아래와 같은 directory를 만들어주면 됨.
+* [참고블로그](https://blog.kovalevskyi.com/multiple-version-of-cuda-libraries-on-the-same-machine-b9502d50ae77)
 
 ```bash
 mkdir -p ~/anaconda3/envs/<env name>/etc/conda/activate.d
@@ -68,7 +69,7 @@ ORIGINAL_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64
 ```
 
-* cuda 10.0부터는 CUPTI로 load 해주자.
+* cuda 10.0부터는 CUPTI도 load 해주자.
 
 ```bash
 ORIGINAL_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
