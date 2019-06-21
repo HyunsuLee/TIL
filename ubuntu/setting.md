@@ -433,6 +433,15 @@ matlab의 경우, matlab command에서 다음과 같이 입력하면 해결.
 
 [참고 문서](https://wiki.archlinux.org/index.php/HiDPI#MATLAB)
 
+### Ubuntu 18.04 scaling
+
+* high resolution display를 쓰고 있는데, 18.04에는 100%, 200%단위로만 display scaling 설정이 가능하다.
+* 하지만 text scaling만 조정하는 방법이 있다.
+
+```bash
+gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
+```
+
 ## Ubuntu ssh server setting
 
 맥과 우분투 모두 ssh는 기본으로 인스톨 되어있다.
