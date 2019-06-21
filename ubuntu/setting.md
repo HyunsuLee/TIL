@@ -166,6 +166,34 @@ ctrl + alt + F1 으로 가상터미널로 들어가 display가 뜨는걸 확인�
 
 ctrl + alt + F7 으로 GUI환경으로 다시 돌아 온다.
 
+## 우분투 무한 로긴
+
+* 최근 우분투 18.04로 업그레이드하면서 생겼던 문제.
+* 업그레이드하면서 당연히 kernel이 업데되면서 그래픽카드 드라이버는 재설정해줘야 했음. 이건 예상했던 문제.
+* 그래픽 카드를 재설치하고, 심지어 CUDA에 포함된 그래픽카드로 다시 잡아도 문제가 해결안되었음.
+* 다음과 같은 방법으로 (아마) 해결된 듯.
+* 그전에 기본으로 깔리는 gdm에서 lightdm으로 바꿔줘야함.
+
+```bash
+sudo dpkg-reconfigure lightdm
+```
+
+* 물론 내 경우에는 이것으로 해결되진 않았음. [참고싸이트](https://askubuntu.com/questions/223501/ubuntu-gets-stuck-in-a-login-loop)
+
+```bash
+ls -lA
+-rw-------  1 root root   53 Nov 29 10:19 .Xauthority
+# 위와 같이 뜬다면
+chown username:username .Xauthority # 내 로긴네임
+# 여기에 추가로
+ls -ld /tmp
+drwxrwxrwt 15 root root 4096 Nov 30 04:17 /tmp
+# 앞의 drwx~~~~~ 가 제대로 되어 있는지 확인
+sudo chmod a+wt /tmp
+```
+
+* 아마도 위의 두가지 해결법(.Xauthority와 tmp) 중에 하나가 먹힌 듯하다.
+* 4GPU machine을 업글하지 말고 환경만 유지 할것.
 ## R설치
 
 terminal 에서  update용 sourcelist에 CRAN mirror를 등록하기
