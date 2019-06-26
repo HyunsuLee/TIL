@@ -194,6 +194,16 @@ sudo chmod a+wt /tmp
 
 * 아마도 위의 두가지 해결법(.Xauthority와 tmp) 중에 하나가 먹힌 듯하다.
 * 4GPU machine을 업글하지 말고 환경만 유지 할것.
+
+## 우분투, 윈도우10 멀티부팅
+
+* 내 경우에는 우분투 18.04가 있는 상태에서 윈도우10을 추가 파티션에 인스톨했다.
+* 그 결과 윈도우 부트 매니저가 활성화되어 원도우로 자동 부팅되었는데, grub option을 살리고 싶었다.
+* 만약 윈도우가 깔려있는 상태에서 우분투를 깔면 grub option booting이 자동 설정된다.
+* 이런 저런 삽질을 하다, 결국 이 [싸이트](https://silentinfotech.com/blog/steps-to-install-windows-10-on-existing-ubuntu-16-04/)에 나와있는 방법으로 해결했다.
+* Live ubuntu가 되는 bootable usb를 준비하고, UEFI모드로 부팅.
+* 그 다음에는 boot-repair 를 깔아서 repair 시켜주면, grub이 전반적으로 재설정되면서 윈도우 부팅 옵션도 추가된다. 
+
 ## R설치
 
 terminal 에서  update용 sourcelist에 CRAN mirror를 등록하기
@@ -259,8 +269,8 @@ sudo apt-get install libxext-dev
 sudo apt-get install mercurial bison flex automake libtool g++ rpm
 sudo apt-get install libxext-dev libncurses-dev python-dev
 sudo apt-get install cython alien
-sudo apt-get install xfonts-100dpi #helvetica
-sudo apt-get install xfonts-75dpi #for some special idraw I like
+sudo apt-get install xfonts-100dpi # helvetica
+sudo apt-get install xfonts-75dpi # for some special idraw I like
 ```
 
 들을 깔아주면 해결.
