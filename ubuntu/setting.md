@@ -13,6 +13,17 @@
 
 1. [terryum 블로그](http://terryum.io/ml_practice/2016/05/15/UbuntuSetup/) 도 참고 할것.
 
+1. blacklist nouveau를 /etc/modprobe.d/blacklist.conf 에 추가할것. 안 그럼 nvidia driver가 안깔림.
+
+1. secure boot option도 diabled해둠. 안그럼 driver installer가 kernel에 덮어쓸 수 없음. [텐서플로 공홈](https://www.tensorflow.org/install/gpu)에서도 secure boot가 과정을 복잡하게 한다고 되어 있음.
+
+1. ubuntu server에서는 linux header를 깔아줘야 하는 듯.
+
+```bash
+sudo apt-get install linux-source
+sudo apt-get install linux-headers-4.15.55-generic
+```
+
 1. [nvidia 공식 홈피](http://www.nvidia.com/download/driverResults.aspx/104284/en-us)에서 정식 그래픽 드라이버를 깔고,
 1. CUDA를 깔땐 driver, openGL전부 안깐다. cuda랑 샘플만 깔아줌.
 
@@ -54,15 +65,18 @@ server $ bash pycharm.sh
 * anaconda의 경우 environment를 (de)activation시킬 때마다 script를 자동으로 가동시킬 수 있다.
 * conda env name안에 아래와 같은 directory를 만들어주면 됨.
 * [참고블로그](https://blog.kovalevskyi.com/multiple-version-of-cuda-libraries-on-the-same-machine-b9502d50ae77)
+* [정식conda홈피](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#activating-an-environment) 
+* miniconda는 path가 다르므로 주의할 것.
 
 ```bash
-mkdir -p ~/anaconda3/envs/<env name>/etc/conda/activate.d
-mkdir -p ~/anaconda3/envs/<env name>/etc/conda/deactivate.d
-vim ~/anaconda3/envs/<env name>/etc/conda/activate.d/activate.sh
-vim ~/anaconda3/envs/<env name>/etc/conda/deactivate.d/deactivate.sh
+cd $CONDA_PREFIX
+mkdir -p ./etc/conda/activate.d
+mkdir -p ./etc/conda/deactivate.d
+touch ./etc/conda/activate.d/env_vars.sh
+touch ./etc/conda/deactivate.d/env_vars.sh
 ```
 
-* activate.sh에는 다음과 같이, cuda 9.0을 load하고 싶을 경우
+* activate.d안의 sh파일에는 다음과 같이, cuda 9.0을 load하고 싶을 경우
 
 ```bash
 ORIGINAL_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
@@ -76,7 +90,7 @@ ORIGINAL_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64:/usr/local/cuda-10.0/extras/CUPTI/lib64
 ```
 
-* deactivate.sh에는 원래 symbolic link로 돌려주는
+* deactivate.d안의 sh파일 에는 원래 symbolic link로 돌려주는
 
 ```bash
 export LD_LIBRARY_PATH=$ORIGINAL_LD_LIBRARY_PATH
@@ -516,8 +530,8 @@ client $ ssh-copy-id your_id@server_ip
 로 하거나
 
 ```bash
-client $ scp .ssh/id_rsa.pub your_id@server_ip:~/Documents/id_rsa.pub
-server $ cat ~/Documents/id_rsa.pub >> authorized_keys
+client $ scp .ssh/id_rsa.pub your_id@server_ip:~/id_rsa.pub
+server $ cat ~/id_rsa.pub >> ~/.ssh/authorized_keys
 ```
 
 로 authorized_keys에 추가해야한다.
@@ -705,6 +719,13 @@ export PATH = "/usr/local/lib/python2.7/dist-packages$PATH"
 export PATH = "/usr/local/lib/python3.4/dist-packages$PATH"
 ```
 
+리부팅 후 network setting이 안 잡히면 ifconfig로 확인 후 eth0이나 eth1이 있는지 확인. 없으면
+
+```bash
+sudo ifconfig eth0 up
+sudo dhclient eth0
+```
+
 ## 우분투 swap잡기
 
 새로운 서버에 swap없었음.
@@ -749,8 +770,10 @@ cifar10_multi_gpu tutorial test중에 연산하다가 자꾸 멈추는 현상이
 
 ```bash
 $ sudo vi /etc/default/grub
-LINUX_.....="net.ifnames=0 biosdevname=0 pcie_aspm=off" # in editor deleted "quiet splash"
+LINUX_.....="biosdevname=0 pcie_aspm=off" # in editor deleted "quiet splash"
 ```
+
+* net.ifnames=0 도 추가했더니, network setting이 이상해짐. 빼고 pcie error는 안 뜸.
 
 ## remote server tensorboard 사용하기
 
@@ -760,7 +783,7 @@ LINUX_.....="net.ifnames=0 biosdevname=0 pcie_aspm=off" # in editor deleted "qui
 ssh -N -f -L localhost:16006:localhost:6006 <user@remote>
 ```
 
-*  server에서
+* server에서
 
 ```bash
 tensorboard --logdir <path>
@@ -788,14 +811,15 @@ LANGUAGE="en_US.UTF-8"
 시스템 전부를 백업할때는 /(root directory) 중 몇군데는 빼야한다. 무한루프에 빠질 수 있기때문에.
 
 ```bash
-sudo -H rsync -aAXv --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/data1/*,/data2/*,/data3/*} / /data3/backup
+sudo -H rsync -aAXv /home/media/data1/ /home/media/data2/ 
+sudo -H rsync -aAXv --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/home/media/*} / /home/media/data3/backup
 ```
 
 데스크탑에서 서버로 작업한 걸 옮길때도 rsync를 쓰는데, ssh로 작업한다.
 
 ```bash
-rsync -avzhe 'ssh -p $port_number' ~/Documents/ miruware@114.71.0.120:~/Documents/
-rsync -avzhe 'ssh -p $port_number' /media/hyunsu/data1/01.Data\&Analysis/ miruware@114.71.0.120:/data1/DataAnalysis/
+rsync -avzhe 'ssh -p $port_number' ~/Documents/ <user name>@<ip address>:~/Documents/
+rsync -avzhe 'ssh -p $port_number' /media/hyunsu/data2/01.DataAnalysis/ <user name>@<ip address>:/home/media/data1/DataAnalysis/
 ```
 
 다른 포트를 이용해야할 경우
@@ -817,4 +841,5 @@ sudo rsync -avzhe /Volumes/Storage/* /Volumes/HDD3/*
 ```bash
 ffmpeg
 ```
+
 [documentation](http://ffmpeg.org/ffmpeg.html#Video-Options)
