@@ -5,7 +5,11 @@
 1. /는 OS booting 전용 영역 package들을 깔걸 생각해서 64G정도 잡음
 1. swap 영역은 윈도우의 cache에 해당 32G
 1. 나머지 partition은 /home으로 몰아줌(이럼 사용자ᅟdata는 따로 백업가능)
-
+1. 부팅 usb로 부팅할때부터 nouveau때문에 화면이 안보일 수 있다. 이럴 땐.
+    1. bios setting 메세지가 뜬 직후 shift를 누르고 grub화면이 뜨는 걸 확인한다.
+    1. grub에서 원하는 ubuntu boot option에서 e를 누른다. 그럼 grub setting 화면이 뜸.
+    1. linux로 시작하는 line에 modprobe.blacklist=nouveau 를 추가한다.
+    
 ## Ubuntu에 tensorflow(GPU) 돌리기
 
 1. 기본적으로는 [ubuntu에 tensorflow구동](http://ishuca.tistory.com/m/post/entry/Ubuntu-1404-%EC%97%90%EC%84%9C-%EC%95%84%EB%82%98%EC%BD%98%EB%8B%A4%EC%97%90-Tensorflow-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0)
@@ -13,7 +17,7 @@
 
 1. [terryum 블로그](http://terryum.io/ml_practice/2016/05/15/UbuntuSetup/) 도 참고 할것.
 
-1. blacklist nouveau를 /etc/modprobe.d/blacklist.conf 에 추가할것. 안 그럼 nvidia driver가 안깔림.
+1. 이건 위의 블로그를 참고할 것. (blacklist nouveau를 /etc/modprobe.d/blacklist.conf 에 추가할것. 안 그럼 nvidia driver가 안깔림.)
 
 1. secure boot option도 diabled해둠. 안그럼 driver installer가 kernel에 덮어쓸 수 없음. [텐서플로 공홈](https://www.tensorflow.org/install/gpu)에서도 secure boot가 과정을 복잡하게 한다고 되어 있음.
 
