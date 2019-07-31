@@ -9,7 +9,7 @@
     1. bios setting 메세지가 뜬 직후 shift를 누르고 grub화면이 뜨는 걸 확인한다.
     1. grub에서 원하는 ubuntu boot option에서 e를 누른다. 그럼 grub setting 화면이 뜸.
     1. linux로 시작하는 line에 modprobe.blacklist=nouveau 를 추가한다.
-    
+
 ## Ubuntu에 tensorflow(GPU) 돌리기
 
 1. 기본적으로는 [ubuntu에 tensorflow구동](http://ishuca.tistory.com/m/post/entry/Ubuntu-1404-%EC%97%90%EC%84%9C-%EC%95%84%EB%82%98%EC%BD%98%EB%8B%A4%EC%97%90-Tensorflow-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0)
@@ -815,30 +815,55 @@ LANGUAGE="en_US.UTF-8"
 시스템 전부를 백업할때는 /(root directory) 중 몇군데는 빼야한다. 무한루프에 빠질 수 있기때문에.
 
 ```bash
-sudo -H rsync -aAXv /home/media/data1/ /home/media/data2/ 
-sudo -H rsync -aAXv --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/home/media/*} / /home/media/data3/backup
+sudo -H rsync -aAXv --progress /home/media/data1/ /home/media/data2/
+sudo -H rsync -avAXHS --progress --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/home/media/*} / /home/media/data3/backup
 ```
 
-데스크탑에서 서버로 작업한 걸 옮길때도 rsync를 쓰는데, ssh로 작업한다.
+데스크탑에서 서버로 작업한 걸 옮길때도 rsync를 쓰는데, ssh로 작업한다. 먼저 대상 폴더에 대한 권한을 설정해줘야 함.
 
 ```bash
-rsync -avzhe 'ssh -p $port_number' ~/Documents/ <user name>@<ip address>:~/Documents/
-rsync -avzhe 'ssh -p $port_number' /media/hyunsu/data2/01.DataAnalysis/ <user name>@<ip address>:/home/media/data1/DataAnalysis/
+sudo chmod -R a+rwx <destination folder>
 ```
-
-다른 포트를 이용해야할 경우
 
 ```bash
-rsync -avzhe 'ssh -p $port_number' [origin] [destination]
+rsync -aAXv --progress --delete -e 'ssh -C -p $port_number' /home/hyunsu/Documents/ <user name>@<ip address>:/home/<user name>/Documents/
+rsync -aAXv --progress --delete -e 'ssh -C -p $port_number' /media/hyunsu/data2/01.DataAnalysis/ <user name>@<ip address>:/home/media/data1/DataAnalysis/
 ```
 
-mac OSX에서는 *를 붙여주어야 함. DevonDB를 빼고 싶었으나, 잘 안됨..
+* bash 실행파일로 만들어둠.
+
+* crontab으로 아예 자동화 할 예정.
+
+* mac OSX에서는 *를 붙여주어야 함. DevonDB를 빼고 싶었으나, 잘 안됨..
 
 ```bash
 sudo rsync -avzhe /Volumes/Storage/* /Volumes/HDD3/*
 ```
 
 또한 일부 파일에 대해 permission이 없는듯한데,(이거 때문에 finder에서 복사가 안된듯) 해결방법을 모르겠음.
+
+### crontab으로 backup 자동화, 그 후 아침까지 suspend
+
+* sudo crontab -e 으로 명령어를 넣어두고, 모든 경로는 root 계정이라고 생각하고 절대경로로.
+* 내 desktop에서는
+
+```bash
+00 23 * * 0-5 /usr/bin/rsync -aAXv --delete -e 'ssh -i /path/.ssh/id_rsa_empty -C -p $port_number' /home/hyunsu/Documents/ <user name>@s<ip address>:/home/hyunsu4gpu/Documents/
+20 23 * * 0-5 /usr/bin/rsync -aAXv --delete -e 'ssh -i /path/.ssh/id_rsa_empty -C -p $port_number' /media/hyunsu/data2/01.DataAnalysis/ <user name>@s<ip address>:/home/media/data1/DataAnalysis/ # rsa key를 passwordless로 만들어둬야 실행됨.
+50 23 * * 0-4 rtcwake -u -s 28800 -m mem # sleep for 8hr
+50 23 * * 5 rtcwake -u -s 169200 -m mem # sleep for 47hr
+```
+
+* server에서는 
+
+```bash
+50 23 * * 0-5 rsync -aAXv --delete /home/media/data1/ /home/media/data2/
+30 00 * * 1-6 rsync -avAXHS --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found --exclude=/home/media/* /* /home/media/data3/backup # cron안에서 {}를 쓰면 못 알아먹음. 이렇게 다 따로 
+50 00 * * 1-5 rtcwake -u -s 28800 -m mem # sleep for 8hr
+50 00 * * 6 rtcwake -u -s 168600 -m mem # sleep for 46hr 50min
+```
+
+* bash file로 root backup을 할 경우, exclude 옵션이 적용 안 된것 같아서 이렇게 해둠. 아마 {}안에 있는 것을 다 무시해서 그런듯.
 
 ## 동영상 변환
 
