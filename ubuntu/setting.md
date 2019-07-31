@@ -850,8 +850,8 @@ sudo rsync -avzhe /Volumes/Storage/* /Volumes/HDD3/*
 ```bash
 00 23 * * 0-5 /usr/bin/rsync -aAXv --delete -e 'ssh -i /path/.ssh/id_rsa_empty -C -p $port_number' /home/hyunsu/Documents/ <user name>@s<ip address>:/home/hyunsu4gpu/Documents/
 20 23 * * 0-5 /usr/bin/rsync -aAXv --delete -e 'ssh -i /path/.ssh/id_rsa_empty -C -p $port_number' /media/hyunsu/data2/01.DataAnalysis/ <user name>@s<ip address>:/home/media/data1/DataAnalysis/ # rsa key를 passwordless로 만들어둬야 실행됨.
-50 23 * * 0-4 rtcwake -u -s 28800 -m mem # sleep for 8hr
-50 23 * * 5 rtcwake -u -s 169200 -m mem # sleep for 47hr
+50 23 * * 0-4 /usr/sbin/rtcwake -u -s 28800 -m mem # sleep for 8hr
+50 23 * * 5 /usr/sbin/rtcwake -u -s 169200 -m mem # sleep for 47hr
 ```
 
 * server에서는 
@@ -859,11 +859,18 @@ sudo rsync -avzhe /Volumes/Storage/* /Volumes/HDD3/*
 ```bash
 50 23 * * 0-5 rsync -aAXv --delete /home/media/data1/ /home/media/data2/
 30 00 * * 1-6 rsync -avAXHS --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found --exclude=/home/media/* /* /home/media/data3/backup # cron안에서 {}를 쓰면 못 알아먹음. 이렇게 다 따로 
-50 00 * * 1-5 rtcwake -u -s 28800 -m mem # sleep for 8hr
-50 00 * * 6 rtcwake -u -s 168600 -m mem # sleep for 46hr 50min
+50 00 * * 1-5 /usr/sbin/rtcwake -u -s 28800 -m mem # sleep for 8hr
+50 00 * * 6 /usr/sbin/rtcwake -u -s 168600 -m mem # sleep for 46hr 50min
 ```
 
 * bash file로 root backup을 할 경우, exclude 옵션이 적용 안 된것 같아서 이렇게 해둠. 아마 {}안에 있는 것을 다 무시해서 그런듯.
+* rsync 명령어는 /usr/bin에 있어서 cron에서도 실행이 되는 것 같지만, (root $PATH를 고려할 것) rtcwake를 시행이 안되서 이것도 절대경로로 처리해둠.
+
+```bash
+which rtcwake
+```
+
+* 이 명령어로 해당 실행명령의 절대경로를 알 수 있음.
 
 ## 동영상 변환
 
