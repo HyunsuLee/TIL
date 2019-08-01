@@ -329,7 +329,7 @@ smbpasswd -a <username>
 service smbd restart
 ```
 
-이제 OSX에서 smb 주소 접근가능. sharing folder를 탐색기해서 정해줘도됨
+이제 OSX에서su smb 주소 접근가능. sharing folder를 탐색기해서 정해줘도됨
 
 ## ubuntu mouse point speed control
 
@@ -644,6 +644,23 @@ $ jupyter nbextensions_configurator enable --user #configurator들 켜기.
 
 이렇게 하면 notebook GUI에서 extensions을 찾아 켜고 끌 수 있다.
 
+### jupter lab error
+
+* nodejs error가 뜰 경우 nodejs를 다시 깐다. LTS support version은 현재 10임.
+* [source site](https://github.com/nodesource/distributions/blob/master/README.md#debinstall)
+
+```bash
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+
+* 그래도 error가 나는 경우, Failed validating schema (@jupyterlab... 등의 error가 날때, rebuild를 해준다.
+* [stack over flow 답](https://stackoverflow.com/questions/57260338/what-is-a-failed-validating-schema-jupyterlab-apputils-extensionpackage-in) 
+
+```bash
+jupyter lab clean && jupyter lab build
+```
+
 ## Using tmux
 
 우분투서버에 터미널로 접속한다음. 한 터미널 윈도우에서 멀티 세션을 돌리고 싶을때 쓴다.
@@ -871,6 +888,22 @@ which rtcwake
 ```
 
 * 이 명령어로 해당 실행명령의 절대경로를 알 수 있음.
+
+### suspend 상태에서 USB 장치로 wake up시키기
+
+* sudo vi /etc/rc.local 로 파일을 열고, exit 0 위에 다음과 같은 명령어를 추가.
+
+```bash
+echo enabled > /sys/bus/usb/devices/1-13/power/wakeup
+echo enabled > /sys/bus/usb/devices/1-14/power/wakeup
+echo enabled > /sys/bus/usb/devices/1-6.2/power/wakeup
+echo enabled > /sys/bus/usb/devices/1-6/power/wakeup
+echo enabled > /sys/bus/usb/devices/2-6/power/wakeup
+echo enabled > /sys/bus/usb/devices/usb1/power/wakeup
+echo enabled > /sys/bus/usb/devices/usb2/power/wakeup
+```
+
+* 모든 USB 장치를 wake up enabled 로 만드는 것. 
 
 ## 동영상 변환
 
