@@ -329,7 +329,7 @@ smbpasswd -a <username>
 service smbd restart
 ```
 
-이제 OSX에서su smb 주소 접근가능. sharing folder를 탐색기해서 정해줘도됨
+이제 OSX에서 smb 주소 접근가능. sharing folder를 탐색기해서 정해줘도됨
 
 ## ubuntu mouse point speed control
 
