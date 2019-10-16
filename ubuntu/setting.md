@@ -871,11 +871,11 @@ sudo rsync -avzhe /Volumes/Storage/* /Volumes/HDD3/*
 50 23 * * 5 /usr/sbin/rtcwake -u -s 169200 -m mem # sleep for 47hr
 ```
 
-* server에서는 
+* server에서는
 
 ```bash
 50 23 * * 0-5 rsync -aAXv --delete /home/media/data1/ /home/media/data2/
-30 00 * * 1-6 rsync -avAXHS --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found --exclude=/home/media/* /* /home/media/data3/backup # cron안에서 {}를 쓰면 못 알아먹음. 이렇게 다 따로 
+30 00 * * 1-6 rsync -avAXHS --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found --exclude=/home/media/* /* /home/media/data3/backup # cron안에서 {}를 쓰면 못 알아먹음. 이렇게 다 따로
 50 00 * * 1-5 /usr/sbin/rtcwake -u -s 28800 -m mem # sleep for 8hr
 50 00 * * 6 /usr/sbin/rtcwake -u -s 168600 -m mem # sleep for 46hr 50min
 ```
@@ -912,3 +912,13 @@ ffmpeg
 ```
 
 [documentation](http://ffmpeg.org/ffmpeg.html#Video-Options)
+
+## 파일명 변환
+
+rename 명령어를 쓴다. 
+
+```bash
+rename "s/ /_/g" *
+```
+
+모든 파일 * 에 대해 공백(s/ )을 __(/_/g)로 치환.
