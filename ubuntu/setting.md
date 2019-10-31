@@ -4,7 +4,7 @@
 1. 윈도우에서 해야함
 1. /는 OS booting 전용 영역 package들을 깔걸 생각해서 64G정도 잡음
 1. swap 영역은 윈도우의 cache에 해당 32G
-1. 나머지 partition은 /home으로 몰아줌(이럼 사용자ᅟdata는 따로 백업가능)
+1. 나머지 partition은 /home으로 몰아줌(이럼 사용자 data는 따로 백업가능)
 1. 부팅 usb로 부팅할때부터 nouveau때문에 화면이 안보일 수 있다. 이럴 땐.
     1. bios setting 메세지가 뜬 직후 shift를 누르고 grub화면이 뜨는 걸 확인한다.
     1. grub에서 원하는 ubuntu boot option에서 e를 누른다. 그럼 grub setting 화면이 뜸.
